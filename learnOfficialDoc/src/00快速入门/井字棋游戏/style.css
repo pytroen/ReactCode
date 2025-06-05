@@ -1,0 +1,20 @@
+.board {
+    font-size: 12px;
+    text-align: center;
+    width: 90px;
+    border: 1px solid black;
+}
+
+.board-row {
+    height: 30px;
+    display: flex;
+
+}
+
+.square {
+    flex: 1;
+    line-height: 30px;
+    border: 1px solid black;
+    background: #fff;
+
+}
