@@ -1,0 +1,9 @@
+:root:root {
+    /* 全局 */
+  --adm-color-primary: rgb(7, 233, 101);
+}
+
+.purple{
+    /* 局部 */
+    --adm-color-primary: #a72b2b;
+}

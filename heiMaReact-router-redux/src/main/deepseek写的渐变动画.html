@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Granim.js 渐变动画演示</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/granim@2.0.0/dist/granim.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: white;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        
+        header {
+            padding: 30px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        
+        .demo-container {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .gradient-box {
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        #gradient-canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .state-title {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .state-desc {
+            font-size: 1.1rem;
+            max-width: 80%;
+            line-height: 1.6;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+        
+        .btn.active {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+        
+        .info-panel {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background: rgba(30, 30, 50, 0.5);
+            border-radius: 15px;
+            margin: 20px;
+        }
+        
+        .info-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #4facfe;
+        }
+        
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .step {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .step-icon {
+            min-width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        
+        .step-content p {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+        }
+        
+        .npm-command {
+            color: #4facfe;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .highlight {
+            color: #00f2fe;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .gradient-box {
+                height: 250px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-palette"></i> Granim.js 渐变动画</h1>
+            <p class="subtitle">使用npm引入Granim.js库实现渐变之间的平滑过渡效果，解决CSS无法直接渐变过渡的问题</p>
+        </header>
+        
+        <div class="content">
+            <div class="demo-container">
+                <div class="gradient-box">
+                    <canvas id="gradient-canvas"></canvas>
+                    <div class="overlay">
+                        <div class="state-title" id="state-title">默认状态</div>
+                        <div class="state-desc" id="state-desc">点击下方按钮切换不同的渐变状态</div>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn" id="state1-btn" data-state="state1">
+                        <i class="fas fa-sun"></i> 日出色
+                    </button>
+                    <button class="btn" id="state2-btn" data-state="state2">
+                        <i class="fas fa-moon"></i> 海洋蓝
+                    </button>
+                    <button class="btn active" id="state3-btn" data-state="state3">
+                        <i class="fas fa-fire"></i> 火焰红
+                    </button>
+                </div>
+            </div>
+            
+            <div class="info-panel">
+                <h2 class="info-title"><i class="fas fa-info-circle"></i> 实现步骤</h2>
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-icon">1</div>
+                        <div class="step-content">
+                            <h3>通过npm安装Granim.js</h3>
+                            <p>在项目目录中运行以下命令：</p>
+                            <div class="code-block">
+                                <span class="npm-command">npm install granim</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-icon">2</div>
+                        <div class="step-content">
+                            <h3>引入Granim.js</h3>
+                            <p>在JavaScript文件中导入库：</p>
+                            <div class="code-block">
+                                import Granim from 'granim';<br>
+                                // 或使用CommonJS<br>
+                                // const Granim = require('granim');
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-icon">3</div>
+                        <div class="step-content">
+                            <h3>创建Canvas元素</h3>
+                            <p>在HTML中添加canvas元素作为渐变容器：</p>
+                            <div class="code-block">
+                                &lt;canvas id="gradient-canvas"&gt;&lt;/canvas&gt;
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-icon">4</div>
+                        <div class="step-content">
+                            <h3>初始化Granim实例</h3>
+                            <p>配置不同状态和渐变效果：</p>
+                            <div class="code-block">
+                                const granim = new Granim({<br>
+                                &nbsp;&nbsp;element: '#gradient-canvas',<br>
+                                &nbsp;&nbsp;direction: 'radial',<br>
+                                &nbsp;&nbsp;states: {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;'state1': { gradients: [...] },<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;'state2': { gradients: [...] },<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;'state3': { gradients: [...] }<br>
+                                &nbsp;&nbsp;}<br>
+                                });
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Granim.js 提供了创建流畅<span class="highlight">渐变动画</span>的能力，解决了纯CSS无法实现渐变之间过渡的问题</p>
+            <p>当前演示使用Granim.js v2.0.0 | 通过CDN引入</p>
+        </footer>
+    </div>
+
+    <script>
+        // 初始化Granim实例
+        const granim = new Granim({
+            element: '#gradient-canvas',
+            direction: 'radial',
+            states: {
+                'state1': {
+                    gradients: [
+                        ['#FF512F', '#DD2476'],
+                        ['#DD2476', '#FF512F']
+                    ],
+                    transitionSpeed: 3000,
+                    loop: true
+                },
+                'state2': {
+                    gradients: [
+                        ['#00c6ff', '#0072ff'],
+                        ['#0072ff', '#00c6ff']
+                    ],
+                    transitionSpeed: 3000,
+                    loop: true
+                },
+                'state3': {
+                    gradients: [
+                        ['#ff416c', '#ff4b2b'],
+                        ['#ff4b2b', '#ff416c']
+                    ],
+                    transitionSpeed: 3000,
+                    loop: true
+                }
+            }
+        });
+        
+        // 默认状态
+        granim.changeState('state3');
+        
+        // 状态切换
+        const buttons = document.querySelectorAll('.btn');
+        const stateTitle = document.getElementById('state-title');
+        const stateDesc = document.getElementById('state-desc');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const state = this.getAttribute('data-state');
+                
+                // 更新活动按钮样式
+                buttons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 更改状态
+                granim.changeState(state);
+                
+                // 更新状态文本
+                switch(state) {
+                    case 'state1':
+                        stateTitle.textContent = '日出色渐变';
+                        stateDesc.textContent = '从暖橙色到深粉色的渐变，模拟日出时的天空色彩';
+                        break;
+                    case 'state2':
+                        stateTitle.textContent = '海洋蓝渐变';
+                        stateDesc.textContent = '从浅蓝到深蓝的渐变，呈现海洋深处的宁静美感';
+                        break;
+                    case 'state3':
+                        stateTitle.textContent = '火焰红渐变';
+                        stateDesc.textContent = '从鲜红到橙红的渐变，展现火焰般的热情与活力';
+                        break;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.main {
+    text-align: center;
+}
+
+.tabFirst>li {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: #eee;
+    list-style: none;
+    cursor: pointer;
+}
+
+.tabFirst>li:hover {
+    color: #333;
+}
+
+
+
+.tabUnactive {
+    /* background-color:#006699;
+     */
+    /* background: #020024; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, rgba(2, 0, 36, 0.71) 0%, rgba(9, 9, 121, 0.87) 52%, rgba(49, 155, 176, 0.94) 100%);
+
+}
+
+.tabActive {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(49, 155, 176, 1);
+    background: radial-gradient(circle, rgba(49, 155, 176, 0.83) 0%, rgba(9, 9, 121, 0.9) 60%, rgba(2, 0, 36, 0.87) 100%);
+}
