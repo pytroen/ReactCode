@@ -1,0 +1,45 @@
+.monthlyBill {
+    text-align: center;
+
+    .header {
+        height: 30px;
+        line-height: 30px;
+        font-size: 17px;
+        margin: 10px 0;
+    }
+
+    .content {
+        border-radius: 10px;
+        height: 100px;
+        margin: 0 15px;
+        padding: 10px 15px;
+        background: #fff;
+        background: linear-gradient(90deg,rgba(180, 180, 58, 1) 0%, rgba(253, 122, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+
+        .title {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+
+            .year {
+                padding-right: 5px;
+                border-right: 1px solid black;
+            }
+
+            .month {
+                margin: 0 5px;
+            }
+        }
+
+        .income-expenses {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .number {
+                margin-bottom: 5px;
+            }
+        }
+    }
+}

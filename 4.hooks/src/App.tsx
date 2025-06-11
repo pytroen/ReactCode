@@ -1,3 +1,6 @@
+// 1.useState
+import TestNum from './1.useState/TestNum'
+
 // 2.useEffect
 // import Example from "./2.useEffect/0.Example"
 // import UserList from './2.useEffect/1.USerList'
@@ -7,7 +10,7 @@
 
 // 3.useContext
 // import Theme from "./3.useContext/example1/Theme"
-import Home from "./3.useContext/example2/Home"
+// import Home from "./3.useContext/example2/Home"
 
 // 7.useReducer
 // import Counter from "./7.useReducer/1.计数器"
@@ -20,6 +23,8 @@ const App: React.FC = () => {
 
   return (
     <div>
+      {/* 1.useState */}
+      <TestNum/>
       {/* 2.useEffect */}
       {/* <Example/> */}
       {/* <UserList/> */}
@@ -29,7 +34,7 @@ const App: React.FC = () => {
 
       {/* 3.useContext */}
       {/* <Theme/> */}
-      <Home/>
+      {/* <Home/> */}
 
       {/* <Counter /> */}
       {/* <ShoppingCart /> */}
